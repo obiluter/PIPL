@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - SIM-PINJAM ASET</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 250px;
+      background-color: #1a363d;
+      color: #fff;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #fff;
+    }
+
+    .user-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .user-info i {
+      font-size: 80px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      padding: 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #3b8e40;
+    }
+
+    .sidebar nav a i {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      flex: 1;
+      padding: 40px 20px;
+      margin-left: 250px; /* Offset for sidebar */
+      background-image: url('Images/UMRAH.jpg');
+      background-size: cover;
+      background-position: center;
+      backdrop-filter: blur(8px);
+      height: 100vh;
+      color: #fff;
+    }
+
+    .card-list {
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+      text-align: left; /* Align content to the left */
+      max-width: 600px; /* Limit the width */
+    }
+
+    .card-list:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-list h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2c7d34;
+      margin-bottom: 15px;
+    }
+
+    .card-list p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .dashboard-container {
+        flex-direction: column;
+      }
+
+      .main-content {
+        padding: 20px;
+        margin-left: 0;
+      }
+
+      .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding: 10px;
+      }
+
+      .sidebar h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      .sidebar nav a {
+        padding: 10px;
+      }
+
+      .card-list {
+        margin: 10px;
+      }
+    }
+
+    /* Button Styling */
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>ADMIN</h2>
+      <div class="user-info">
+        <!-- Using Font Awesome user icon for admin -->
+        <i class="fas fa-user-shield"></i>
+      </div>
+      <nav>
+        <a href="databarang.html"><i class="fas fa-box"></i> Data Barang</a>
+        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Log-Out</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="card-list">
+        <h2>Riwayat Pengembalian</h2>
+        <p>Informasi mengenai barang yang telah dikembalikan dan statusnya.</p>
+        <a href="verifikasi1.html" class="button">Lihat Selengkapnya</a>
+      </div>
+      <div class="card-list">
+        <h2>Riwayat Peminjaman</h2>
+        <p>Lihat riwayat peminjaman aset BMN (Barang Milik Negara) di sini.</p>
+        <a href="verifikasi.html" class="button">Lihat Selengkapnya</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

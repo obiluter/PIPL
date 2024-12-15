@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Mahasiswa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .dashboard-container {
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 250px;
+      background-color: #1a363d;
+      color: #fff;
+      padding: 20px;
+      height: 100%;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar h2 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .user-info {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .user-info svg {
+      width: 80px;
+      height: 80px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sidebar nav a {
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      padding: 15px;
+      text-decoration: none;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    .sidebar nav a:hover {
+      background-color: #3b8e40;
+    }
+
+    .sidebar nav a i {
+      margin-right: 12px;
+      font-size: 20px;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      margin-left: 270px; /* Tambahkan jarak lebih besar dari sidebar */
+      background-color: #f4f4f9;
+      color: #333;
+    }
+
+    .card-list {
+      background-color: #ffffff;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-list:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-list h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2c7d34;
+      margin-bottom: 15px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background-color: #1a363d;
+      color: #ffffff;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>MAHASISWA</h2>
+      <div class="user-info">
+        <!-- SVG Ikon Mahasiswa -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="80" height="80">
+          <circle cx="32" cy="22" r="14" fill="#f4c2c2"/>
+          <path d="M32 36c-10.5 0-19 8.5-19 19v3h38v-3c0-10.5-8.5-19-19-19z" fill="#6c757d"/>
+          <path d="M48 14L32 4 16 14l16 10 16-10z" fill="#007bff"/>
+          <path d="M24 17l8 5 8-5v5l-8 5-8-5v-5z" fill="#0056b3"/>
+        </svg>
+      </div>
+      <nav>
+        <a href="peminjaman.html"><i class="fas fa-hand-holding"></i> Peminjaman</a>
+        <a href="pengembalian.html"><i class="fas fa-undo-alt"></i> Pengembalian</a>
+        <a href="login.html"><i class="fas fa-sign-out-alt"></i> Log-Out</a> <!-- Mengarah ke login.html -->
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <h1>Data Barang</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nama Barang</th>
+            <th>Kategori</th>
+            <th>Jumlah</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="data-barang">
+          <!-- Data akan diisi secara dinamis -->
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script src="barang.js"></script>
+</body>
+</html>

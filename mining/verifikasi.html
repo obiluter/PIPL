@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Peminjaman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #555; /* Medium gray */
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+        }
+
+        header h1 {
+            font-size: 40px;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 40px auto;
+        }
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px; /* Add space between tables */
+        }
+
+        table th, table td {
+            padding: 10px 15px; /* Smaller padding for compact table */
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #888; /* Light gray background for table header */
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+
+        table td {
+            font-size: 14px;
+        }
+
+        .no-data {
+            text-align: center;
+            color: #777;
+            font-size: 18px;
+        }
+
+        /* Button Back to Home */
+        .back-to-home {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .back-to-home i {
+            margin-right: 8px; /* Space between icon and text */
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            table th, table td {
+                padding: 8px 12px; /* Smaller padding on smaller screens */
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Optional: Add padding and margins to give more space between sections */
+        .section {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Riwayat Peminjaman -->
+        <div class="section">
+            <h2> Riwayat Data Peminjaman </h2>
+
+            <!-- Tabel untuk menampilkan data peminjaman -->
+            <table id="riwayatPeminjamanTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>NIM</th>
+                        <th>Jurusan</th>
+                        <th>Kontak</th>
+                        <th>Alamat</th>
+                        <th>Barang ID</th>
+                        <th>Tanggal Peminjaman</th>
+                        <th>Tanggal Pengembalian</th>
+                        <th>Keterangan</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data peminjaman akan diisi di sini -->
+                </tbody>
+            </table>
+
+            <p id="noDataMessage" class="no-data" style="display: none;">Tidak ada data peminjaman.</p>
+        </div>
+
+    <!-- Back to Home Button -->
+    <a href="admin_dashboard.html" class="back-to-home">
+        <i class="fas fa-home"></i> Back
+    </a>
+
+    <script>
+        // Fungsi untuk mengambil data dari riwayat.php
+        function fetchRiwayatPeminjaman() {
+            fetch('verifikasi.php') // Panggil file PHP untuk peminjaman
+                .then(response => response.json()) // Konversi response ke JSON
+                .then(data => {
+                    const tableBody = document.querySelector("#riwayatPeminjamanTable tbody");
+                    const noDataMessage = document.getElementById("noDataMessage");
+                    tableBody.innerHTML = ""; // Kosongkan tabel sebelum diisi
+
+                    // Periksa jika data tidak kosong
+                    if (data.length > 0) {
+                        noDataMessage.style.display = "none"; // Sembunyikan pesan "Tidak ada data"
+                        data.forEach(row => {
+                            const tr = document.createElement("tr");
+                            tr.innerHTML = `
+                                <td>${row.id}</td>
+                                <td>${row.nama}</td>
+                                <td>${row.nim}</td>
+                                <td>${row.jurusan}</td>
+                                <td>${row.kontak}</td>
+                                <td>${row.alamat}</td>
+                                <td>${row.barang_id}</td>
+                                <td>${row.tanggal_peminjaman}</td>
+                                <td>${row.tanggal_pengembalian}</td>
+                                <td>${row.keterangan}</td>
+                                <td>
+                                    <select class="status-select" data-id="${row.id}">
+                                        <option value="Pending" ${row.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                        <option value="Approved" ${row.status === 'Approved' ? 'selected' : ''}>Approved</option>
+                                        <option value="Rejected" ${row.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
+                                    </select>
+                                </td>
+                            `;
+                            tableBody.appendChild(tr);
+                        });
+                    } else {
+                        noDataMessage.style.display = "block"; // Tampilkan pesan jika tidak ada data
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const noDataMessage = document.getElementById("noDataMessage");
+                    noDataMessage.style.display = "block";
+                    noDataMessage.textContent = "Gagal memuat data.";
+                });
+        }
+
+        // Menangani perubahan status saat dipilih
+        document.addEventListener("change", function(event) {
+            if (event.target && event.target.matches(".status-select")) {
+                const id = event.target.dataset.id;
+                const status = event.target.value;
+
+                // Mengirimkan status yang diperbarui ke server menggunakan AJAX
+                fetch('update.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id: id, status: status })
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert('Status berhasil diperbarui!');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat memperbarui status.');
+                });
+            }
+        });
+
+        // Panggil fungsi fetchRiwayat saat halaman dimuat
+        document.addEventListener("DOMContentLoaded", () => {
+            fetchRiwayatPeminjaman();
+        });
+    </script>
+</body>
+</html>
